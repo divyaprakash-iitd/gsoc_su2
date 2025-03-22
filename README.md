@@ -31,3 +31,8 @@ conda activate paraview_env
 conda install conda-forge::paraview
 ```
 ParaView version 5.13.2 was successfully installed and used to visualize SU2 results.
+
+# Assignment 3
+The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
+
+mpirun -np 4 python3 -m mpi4py launch_unsteady_CHT_FlatPlate.py --parallel -f unsteady_CHT_FlatPlate_Conf.cfg
