@@ -42,11 +42,13 @@ gmsh -2 jet_mesh.geo -save_all -o jet_mesh.su2 -format su2
 The following changes were made.
 1. The width of the domain was increased to 10 times the jet diameter.
 2. The mesh was refined further
+![Mesh](assignment_2/gsoc_2_mesh.png)
 
 The configuration file of [Sandia Jet](https://github.com/su2code/VandV/tree/master/rans/SANDIA_jet) was used as starting point and changes were made to it according to the details in the provided [paper](https://www.researchgate.net/publication/254224677_Investigation_of_the_Mixing_Process_in_an_Axisymmetric_Turbulent_Jet_Using_PIV_and_LIF).
 
 A simulation was run and some plots are shown below.
 
+![Velocity Contours](assignment_2/gsoc_2_velocity.png)
 
 ## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
