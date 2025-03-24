@@ -39,6 +39,8 @@ The provided geo file was used to create the mesh using gmsh and converted to su
 ```bash
 gmsh -2 jet_mesh.geo -save_all -o jet_mesh.su2 -format su2
 ```
+![Computational Domain](assignment_2/c_domain.jpg)
+
 The following changes were made.
 1. The width of the domain was increased to 10 times the jet diameter.
 2. The mesh was refined further
