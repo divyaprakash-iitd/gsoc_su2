@@ -49,6 +49,7 @@ The configuration file of [Sandia Jet](https://github.com/su2code/VandV/tree/mas
 A simulation was run and some plots are shown below.
 
 ![Velocity Contours](assignment_2/gsoc_2_velocity.png)
+![Residual Plot](assignment_2/rms_residuals.png)
 
 ## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
