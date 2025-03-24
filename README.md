@@ -1,11 +1,13 @@
-# Assignment-1: SU2 Installation with MPI and Python Wrappers
+# GSoC 2025 Assignments for SU2
 
-## Prerequisites
+## Assignment-1: SU2 Installation with MPI and Python Wrappers
+
+### Prerequisites
 - OpenMPI 4.1.2 (verified with `mpirun --version`)
 - SWIG (installed via package manager)
 - Python 3 with mpi4py
 
-## Installation Commands
+### Installation Commands
 ```bash
 ./meson.py build -Denable-pywrapper=true --prefix=/home/baadalvm/SU2
 ```
@@ -32,7 +34,7 @@ conda install conda-forge::paraview
 ```
 ParaView version 5.13.2 was successfully installed and used to visualize SU2 results.
 
-# Assignment 2
+## Assignment 2: Turbulent Jet Case
 The provided geo file was used to create the mesh using gmsh and converted to su2 format using the following.
 ```bash
 gmsh -2 jet_mesh.geo -save_all -o jet_mesh.su2 -format su2
@@ -46,11 +48,14 @@ The configuration file of [Sandia Jet](https://github.com/su2code/VandV/tree/mas
 A simulation was run and some plots are shown below.
 
 
-
-
-# Assignment 3
+## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
 
 ```bash
 mpirun -np 4 python3 -m mpi4py launch_unsteady_CHT_FlatPlate.py --parallel -f unsteady_CHT_FlatPlate_Conf.cfg
 ```
+
+## Assignment 4: Modification of the python wrapper setup
+
+
+## Assignment 5: Addition of New Volume Output
