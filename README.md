@@ -56,11 +56,14 @@ A simulation was run and some plots are shown below.
 ## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
 
+The simulation was run using the python wrapper.
 ```bash
 mpirun -np 4 python3 -m mpi4py launch_unsteady_CHT_FlatPlate.py --parallel -f unsteady_CHT_FlatPlate_Conf.cfg
 ```
+![Temperature](assignment_3/gsoc_3_temp.png)
 
 ## Assignment 4: Modification of the python wrapper setup
-
+Currently in progress
 
 ## Assignment 5: Addition of New Volume Output
+Currently in progress
