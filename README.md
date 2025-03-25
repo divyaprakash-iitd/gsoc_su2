@@ -50,13 +50,26 @@ The configuration file of [Sandia Jet](https://github.com/su2code/VandV/tree/mas
 
 A simulation was run and some plots are shown below.
 
-![Velocity Contours](assignment_2/gsoc_2_velocity.png)
-![Residual Plot](assignment_2/rms_residuals.png)
+<p align="center">
+  <img src="assignment_2/rms_residuals.png" alt="convergence plot">
+  <br>
+  <em>Convergence plot</em>
+</p>
+
+<p align="center">
+  <img src="assignment_2/gsoc_2_velocity.png" alt="velocity contours">
+  <br>
+  <em>Velocity contours</em>
+</p>
 
 ## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
 
-![Temperature](assignment_3/gsoc_3_temp.png)
+<p align="center">
+  <img src="assignment_3/gsoc_3_temp.png" alt="mesh">
+  <br>
+  <em>Computational Mesh</em>
+</p>
 
 The simulation was run using the python wrapper.
 ```bash
@@ -81,9 +94,15 @@ for iVertex in range(nVertex_CHTMarker):
 ```
 
 <p align="center">
-  <img src="assignment_4/gsoc_4_temp.webp" alt="Spatial varying temperature">
+  <img src="assignment_4/gsoc_4_temp.png" alt="Spatial varying temperature">
   <br>
   <em>The warped surface showing the sinusoidally varying temperature</em>
+</p>
+
+<p align="center">
+  <img src="assignment_4/rms_residuals.png" alt="convergence plot">
+  <br>
+  <em>Convergence plot</em>
 </p>
 
 ## Assignment 5: Addition of New Volume Output
