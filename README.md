@@ -70,7 +70,21 @@ mpirun -np 4 python3 -m mpi4py launch_unsteady_CHT_FlatPlate.py --parallel -f un
 
 
 ## Assignment 4: Modification of the python wrapper setup
-Currently in progress
+
+This was done in two steps.
+1. The simulation from assignment 3 was converted to steady state
+2. The temporal variation was changed to spatial using the following.
+```python
+for iVertex in range(nVertex_CHTMarker):
+    WallTemp = 293.0 + 57.0*sin(2*pi* iVertex / (nVertex_CHTMarker - 1))
+    SU2Driver.SetMarkerCustomTemperature(CHTMarkerID, iVertex, WallTemp)
+```
+
+<p align="center">
+  <img src="assignment_4/gsoc_4_temp.webp" alt="Spatial varying temperature">
+  <br>
+  <em>The warped surface showing the sinusoidally varying temperature</em>
+</p>
 
 ## Assignment 5: Addition of New Volume Output
 Currently in progress
