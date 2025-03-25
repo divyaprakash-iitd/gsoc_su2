@@ -56,11 +56,18 @@ A simulation was run and some plots are shown below.
 ## Assignment 3: Using Python Wrapper
 The mesh was downloaded from [here](https://github.com/su2code/TestCases/blob/master/py_wrapper/flatPlate_unsteady_CHT/2D_FlatPlate_Rounded.su2).
 
+![Temperature](assignment_3/gsoc_3_temp.png)
+
 The simulation was run using the python wrapper.
 ```bash
 mpirun -np 4 python3 -m mpi4py launch_unsteady_CHT_FlatPlate.py --parallel -f unsteady_CHT_FlatPlate_Conf.cfg
 ```
-![Temperature](assignment_3/gsoc_3_temp.png)
+<p align="center">
+  <img src="assignment_3/gsoc_3_temp.webp" alt="Filled contours showing temperature variation of one complete cycle">
+  <br>
+  <em>Filled contours showing temperature variation of one complete cycle</em>
+</p>
+
 
 ## Assignment 4: Modification of the python wrapper setup
 Currently in progress
