@@ -59,7 +59,7 @@ A simulation was run and some plots are shown below.
 <p align="center">
   <img src="assignment_2/gsoc_2_velocity.png" alt="velocity contours">
   <br>
-  <em>Velocity contours</em>
+  <em>Velocity magnitude contours</em>
 </p>
 
 ## Assignment 3: Using Python Wrapper
@@ -105,5 +105,10 @@ for iVertex in range(nVertex_CHTMarker):
   <em>Convergence plot</em>
 </p>
 
+<p align="center">
+  <img src="assignment_4/gsoc_4_temp_c.png" alt="temperature plot">
+  <br>
+  <em>Temperature contours</em>
+</p>
 ## Assignment 5: Addition of New Volume Output
 Currently in progress
