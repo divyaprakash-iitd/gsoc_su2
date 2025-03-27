@@ -112,4 +112,40 @@ for iVertex in range(nVertex_CHTMarker):
 </p>
 
 ## Assignment 5: Addition of New Volume Output
-Currently in progress
+Changes in the source code
+```diff
+diff --git a/assignment_5/CFlowCompOutput.cpp b/assignment_5/CFlowCompOutput.cpp
+index e460109..9254964 100644
+--- a/assignment_5/CFlowCompOutput.cpp
++++ b/assignment_5/CFlowCompOutput.cpp
+@@ -50,2 +50,3 @@ CFlowCompOutput::CFlowCompOutput(const CConfig *config, unsigned short nDim) : C
+     requestedScreenFields.emplace_back("RMS_ENERGY");
++    requestedScreenFields.emplace_back("RMS_SS");
+     nRequestedScreenFields = requestedScreenFields.size();
+@@ -101,2 +102,5 @@ void CFlowCompOutput::SetHistoryOutputFields(CConfig *config){
+ 
++  // My Addition
++  AddHistoryOutput("RMS_SS",    "rms[SS]",  ScreenOutputFormat::FIXED, "RMS_SS", "Root-mean square of sound speed.", HistoryFieldType::RESIDUAL);
++  
+   /// BEGIN_GROUP: RMS_RES, DESCRIPTION: The root-mean-square residuals of the SOLUTION variables.
+@@ -240,2 +244,6 @@ void CFlowCompOutput::SetVolumeOutputFields(CConfig *config){
+   AddVolumeOutput("MACH",        "Mach",                    "PRIMITIVE", "Mach number");
++  
++  // My Addition
++  AddVolumeOutput("SOUNDSPEED",        "Soundspeed",                    "PRIMITIVE", "local speed of sound");
++  
+   AddVolumeOutput("PRESSURE_COEFF", "Pressure_Coefficient", "PRIMITIVE", "Pressure coefficient");
+@@ -337,2 +345,5 @@ void CFlowCompOutput::LoadVolumeData(CConfig *config, CGeometry *geometry, CSolv
+   
++  // My Addition
++  SetVolumeOutputValue("SOUNDSPEED", iPoint, Node_Flow->GetSoundSpeed(iPoint));
++
+   const su2double factor = solver[FLOW_SOL]->GetReferenceDynamicPressure();
+@@ -394,2 +405,6 @@ void CFlowCompOutput::LoadHistoryData(CConfig *config, CGeometry *geometry, CSol
+ 
++
++  // My Addition
++  SetHistoryOutputValue("RMS_SS", log10(flow_solver->GetRes_RMS(0)));
++
+   SetHistoryOutputValue("RMS_DENSITY", log10(flow_solver->GetRes_RMS(0)));
+```
