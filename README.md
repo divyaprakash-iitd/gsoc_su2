@@ -114,7 +114,9 @@ for iVertex in range(nVertex_CHTMarker):
 ## Assignment 5: Addition of New Volume Output
 The second assignment was of incompressible flow. However in order to plot variation of local speed of sound a compressible case was set up. The configuration file from SU2 tutorial [Turbulen Flat Plate](https://github.com/su2code/Tutorials/blob/master/compressible_flow/Turbulent_Flat_Plate/turb_SA_flatplate.cfg) was used as a starting point.
 
-In order to add the volume, screen and history output the source code of SU2 was explored. It was found that `/home/baadalvm/SU2/SU2_CFD/src/output/CFlowCompOutput.cpp` contained instructions on output of existing variables in compressible flow cases. The local speed of sound was added as `SOUNDSPEED`. However for adding history and screen output, it was unclear as to what should these values be. For now, the values calculated for `RMS_DENSITY` was copied to `RMS_SS`. This was done only to demonstrate that the values could be printed. However, the actual calculation of `RMS_SS` is yet to be implemented. The discussed changes are shown below. The code was recompiled and run.
+In order to add the volume, screen and history output the source code of SU2 was explored. It was found that `/home/baadalvm/SU2/SU2_CFD/src/output/CFlowCompOutput.cpp` contained instructions on output of existing variables in compressible flow cases. The local speed of sound was added as `SOUNDSPEED`. 
+
+> However for adding history and screen output, it was unclear as to what should these values be. For now, the values calculated for `RMS_DENSITY` was copied to `RMS_SS`. This was done only to demonstrate that the values could be printed. However, the actual calculation of `RMS_SS` is yet to be implemented. The discussed changes are shown below. The code was recompiled and run.
 
 Changes in the source code
 ```diff
@@ -153,6 +155,20 @@ index e460109..9254964 100644
 +
    SetHistoryOutputValue("RMS_DENSITY", log10(flow_solver->GetRes_RMS(0)));
 ```
+The simulation did not converge for the values in the configuration file. However, the images are attached nonetheless to demonstrate that the code compiled and the desired outputs were obtained, but the values are not correct.
+
+
+<p align="center">
+  <img src="assignment_5/rms_residuals.png" alt="residual plot">
+  <br>
+  <em>Residuals plot</em>
+</p>
+
+<p align="center">
+  <img src="assignment_5/gsoc_5_velocity.png" alt="velocity plot">
+  <br>
+  <em>Velocity contours</em>
+</p>
 
 ### Volume Output
 <p align="center">
@@ -196,10 +212,3 @@ Time_Iter","Outer_Iter","Inner_Iter",     "rms[SS]"    ,    "rms[Rho]"    ,    "
           0,           0,           4,      -3.043686389,      -3.043686389,     -0.7477719572,     -0.5769750163,       2.432922665,      -7.6890```
 
 
-The simulation did not converge for the values in the configuration file. However, the images are attached nonetheless to demonstrate that the code compiled and the desired outputs were obtained, but the values are not correct.
-
-<p align="center">
-  <img src="assignment_5/gsoc_5_velocity.png" alt="velocity plot">
-  <br>
-  <em>Velocity contours</em>
-</p>
