@@ -112,6 +112,10 @@ for iVertex in range(nVertex_CHTMarker):
 </p>
 
 ## Assignment 5: Addition of New Volume Output
+The second assignment was of incompressible flow. However in order to plot variation of local speed of sound a compressible case was set up. The configuration file from SU2 tutorial [Turbulen Flat Plate](https://github.com/su2code/Tutorials/blob/master/compressible_flow/Turbulent_Flat_Plate/turb_SA_flatplate.cfg) was used as a starting point.
+
+In order to add the volume, screen and history output the source code of SU2 was explored. It was found that `/home/baadalvm/SU2/SU2_CFD/src/output/CFlowCompOutput.cpp` contained instructions on output of existing variables in compressible flow cases. The local speed of sound was added as `SOUNDSPEED`. However for adding history and screen output, it was unclear as to what should these values be. For now, the values calculated for `RMS_DENSITY` was copied to `RMS_SS`. This was done only to demonstrate that the values could be printed. However, the actual calculation of `RMS_SS` is yet to be implemented. The discussed changes are shown below. The code was recompiled and run.
+
 Changes in the source code
 ```diff
 diff --git a/assignment_5/CFlowCompOutput.cpp b/assignment_5/CFlowCompOutput.cpp
@@ -149,3 +153,53 @@ index e460109..9254964 100644
 +
    SetHistoryOutputValue("RMS_DENSITY", log10(flow_solver->GetRes_RMS(0)));
 ```
+
+### Volume Output
+<p align="center">
+  <img src="assignment_5/gsoc_5_ss.png" alt="temperature plot">
+  <br>
+  <em>Local speed of sound contours</em>
+</p>
+
+### Screen Output
+```
+------------------------------ Begin Solver -----------------------------
+
+Simulation Run using the Single-zone Driver
+WARNING: SU2 was not compiled for an AVX-capable architecture. Performance could be better,
+         see https://su2code.github.io/docs_v7/Build-SU2-Linux-MacOS/#compiler-optimizations
++---------------------------------------------------+
+|  Inner_Iter|   Time(sec)|    rms[Rho]|     rms[SS]|
++---------------------------------------------------+
+|           0|  1.6321e-01|   -2.653052|   -2.653052|
+|           1|  1.5855e-01|   -2.827255|   -2.827255|
+|           2|  1.5220e-01|   -2.975579|   -2.975579|
+|           3|  1.4938e-01|   -2.874256|   -2.874256|
+|           4|  1.4732e-01|   -3.043686|   -3.043686|
+|           5|  1.4597e-01|   -3.209436|   -3.209436|
+|           6|  1.4424e-01|   -3.420064|   -3.420064|
+|           7|  1.4211e-01|   -3.618999|   -3.618999|
+|           8|  1.4131e-01|   -3.732643|   -3.732643|
+|           9|  1.4100e-01|   -3.818958|   -3.818958|
+
+----------------------------- Solver Exit -------------------------------
+```
+
+
+### History Output
+```
+Time_Iter","Outer_Iter","Inner_Iter",     "rms[SS]"    ,    "rms[Rho]"    ,    "rms[RhoU]"   ,    "rms[RhoV]"   ,    "rms[RhoE]"   ,     "rms[nu]"
+          0,           0,           0,      -2.653051796,      -2.653051796,     -0.1324096923,       -13.6743582,       2.797015564,       -7.36042494
+          0,           0,           1,      -2.827254643,      -2.827254643,     -0.3088112171,      -1.358660997,       2.619073945,      -7.276284674
+          0,           0,           2,      -2.975579386,      -2.975579386,     -0.4766383633,       -1.11072433,       2.498680485,      -7.445716731
+          0,           0,           3,      -2.874255962,      -2.874255962,     -0.5744251073,      -0.704001935,       2.603213505,      -7.670746395
+          0,           0,           4,      -3.043686389,      -3.043686389,     -0.7477719572,     -0.5769750163,       2.432922665,      -7.6890```
+
+
+The simulation did not converge for the values in the configuration file. However, the images are attached nonetheless to demonstrate that the code compiled and the desired outputs were obtained, but the values are not correct.
+
+<p align="center">
+  <img src="assignment_5/gsoc_5_velocity.png" alt="velocity plot">
+  <br>
+  <em>Velocity contours</em>
+</p>
