@@ -48,6 +48,7 @@ CFlowCompOutput::CFlowCompOutput(const CConfig *config, unsigned short nDim) : C
     requestedScreenFields.emplace_back("RMS_MOMENTUM-X");
     requestedScreenFields.emplace_back("RMS_MOMENTUM-Y");
     requestedScreenFields.emplace_back("RMS_ENERGY");
+    requestedScreenFields.emplace_back("RMS_SS");
     nRequestedScreenFields = requestedScreenFields.size();
   }
   if (nRequestedVolumeFields == 0){
@@ -99,6 +100,9 @@ CFlowCompOutput::CFlowCompOutput(const CConfig *config, unsigned short nDim) : C
 
 void CFlowCompOutput::SetHistoryOutputFields(CConfig *config){
 
+  // My Addition
+  AddHistoryOutput("RMS_SS",    "rms[SS]",  ScreenOutputFormat::FIXED, "RMS_SS", "Root-mean square of sound speed.", HistoryFieldType::RESIDUAL);
+  
   /// BEGIN_GROUP: RMS_RES, DESCRIPTION: The root-mean-square residuals of the SOLUTION variables.
   /// DESCRIPTION: Root-mean square residual of the density.
   AddHistoryOutput("RMS_DENSITY",    "rms[Rho]",  ScreenOutputFormat::FIXED, "RMS_RES", "Root-mean square residual of the density.", HistoryFieldType::RESIDUAL);
@@ -238,6 +242,10 @@ void CFlowCompOutput::SetVolumeOutputFields(CConfig *config){
   AddVolumeOutput("PRESSURE",    "Pressure",                "PRIMITIVE", "Pressure");
   AddVolumeOutput("TEMPERATURE", "Temperature",             "PRIMITIVE", "Temperature");
   AddVolumeOutput("MACH",        "Mach",                    "PRIMITIVE", "Mach number");
+  
+  // My Addition
+  AddVolumeOutput("SOUNDSPEED",        "Soundspeed",                    "PRIMITIVE", "local speed of sound");
+  
   AddVolumeOutput("PRESSURE_COEFF", "Pressure_Coefficient", "PRIMITIVE", "Pressure coefficient");
   AddVolumeOutput("VELOCITY-X", "Velocity_x", "PRIMITIVE", "x-component of the velocity vector");
   AddVolumeOutput("VELOCITY-Y", "Velocity_y", "PRIMITIVE", "y-component of the velocity vector");
@@ -334,6 +342,9 @@ void CFlowCompOutput::LoadVolumeData(CConfig *config, CGeometry *geometry, CSolv
   SetVolumeOutputValue("PRESSURE", iPoint, Node_Flow->GetPressure(iPoint));
   SetVolumeOutputValue("TEMPERATURE", iPoint, Node_Flow->GetTemperature(iPoint));
   SetVolumeOutputValue("MACH", iPoint, sqrt(Node_Flow->GetVelocity2(iPoint))/Node_Flow->GetSoundSpeed(iPoint));
+  
+  // My Addition
+  SetVolumeOutputValue("SOUNDSPEED", iPoint, Node_Flow->GetSoundSpeed(iPoint));
 
   const su2double factor = solver[FLOW_SOL]->GetReferenceDynamicPressure();
   SetVolumeOutputValue("PRESSURE_COEFF", iPoint, (Node_Flow->GetPressure(iPoint) - solver[FLOW_SOL]->GetPressure_Inf())/factor);
@@ -391,6 +402,10 @@ void CFlowCompOutput::LoadHistoryData(CConfig *config, CGeometry *geometry, CSol
 
   CSolver* flow_solver = solver[FLOW_SOL];
   CSolver* mesh_solver = solver[MESH_SOL];
+
+
+  // My Addition
+  SetHistoryOutputValue("RMS_SS", log10(flow_solver->GetRes_RMS(0)));
 
   SetHistoryOutputValue("RMS_DENSITY", log10(flow_solver->GetRes_RMS(0)));
   SetHistoryOutputValue("RMS_MOMENTUM-X", log10(flow_solver->GetRes_RMS(1)));
